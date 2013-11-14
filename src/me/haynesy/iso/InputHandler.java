@@ -2,6 +2,7 @@ package me.haynesy.iso;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Arrays;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,22 +13,40 @@ import java.awt.event.KeyListener;
  */
 public class InputHandler implements KeyListener {
     public boolean escape;
+    public boolean up, right, down, left;
 
+    private boolean[] keys;
+
+
+    public InputHandler(){
+        keys = new boolean[255];
+        Arrays.fill(keys, false);
+        up = false;
+        right = false;
+        down = false;
+        left = false;
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {
-
+        if(KeyEvent.VK_ESCAPE == e.getKeyCode())
+            escape = true;
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        keys[e.getKeyCode()] = true;
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if(KeyEvent.VK_ESCAPE == e.getKeyCode())
-            escape = true;
+        keys[e.getKeyCode()] = false;
+    }
 
+    public void update(){
+        up = keys[KeyEvent.VK_W];
+        right = keys[KeyEvent.VK_D];
+        down = keys[KeyEvent.VK_S];
+        left = keys[KeyEvent.VK_A];
     }
 }

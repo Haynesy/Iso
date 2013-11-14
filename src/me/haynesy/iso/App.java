@@ -109,7 +109,6 @@ public class App extends JFrame implements Runnable{
         input = new InputHandler();
         addKeyListener(input);
 
-
         level = new Level(screen);
 
         random = new Random();
@@ -127,7 +126,8 @@ public class App extends JFrame implements Runnable{
     }
 
     private void tick() {
-
+        input.update();
+        level.update(input);
         if(input.escape)
             running = false;
 

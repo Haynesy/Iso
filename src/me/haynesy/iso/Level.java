@@ -1,9 +1,12 @@
 package me.haynesy.iso;
 
+import me.haynesy.iso.entities.Entity;
 import me.haynesy.iso.graphics.Bitmap;
 import me.haynesy.iso.graphics.Screen;
 import me.haynesy.iso.graphics.Tile;
 import me.haynesy.iso.graphics.Tiles;
+
+import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,9 +21,11 @@ public class Level {
     private final int tileWidth;
     private Screen screen;
     private int[][] map;
+    private ArrayList<Entity> entities;
 
     public Level(Screen screen){
         this.screen = screen;
+        entities = new ArrayList<Entity>();
 
         map = new int[][] {
             {1, 1, 1, 1, 1, 1, 1, 1},
@@ -57,6 +62,10 @@ public class Level {
                     screen.render(Tiles.HERO, x * tileWidth, y * tileHeight);
             }
         }
+
+    }
+
+    public void update(InputHandler input) {
 
     }
 }
