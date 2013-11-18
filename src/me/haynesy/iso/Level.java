@@ -1,6 +1,7 @@
 package me.haynesy.iso;
 
 import me.haynesy.iso.entities.Entity;
+import me.haynesy.iso.entities.Hero;
 import me.haynesy.iso.graphics.Bitmap;
 import me.haynesy.iso.graphics.Screen;
 import me.haynesy.iso.graphics.Tile;
@@ -22,14 +23,17 @@ public class Level {
     private Screen screen;
     private int[][] map;
     private ArrayList<Entity> entities;
+    private Hero hero;
 
     public Level(Screen screen){
         this.screen = screen;
         entities = new ArrayList<Entity>();
+        hero = new Hero();
+        entities.add(hero);
 
         map = new int[][] {
             {1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 2, 0, 0, 0, 0, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 1},
             {1, 0, 1, 0, 0, 0, 0, 1},
             {1, 0, 0, 0, 0, 0, 0, 1},
             {1, 0, 0, 0, 0, 0, 0, 1},
@@ -54,18 +58,20 @@ public class Level {
 
                 if(tile == Tile.GRASS)
                     screen.render(Tiles.GRASS, x * tileWidth, y * tileHeight);
-
                 else if(tile == Tile.WALL)
                     screen.render(Tiles.WALL, x * tileWidth, y * tileHeight);
 
-                else if(tile == Tile.HERO)
-                    screen.render(Tiles.HERO, x * tileWidth, y * tileHeight);
+
             }
         }
 
+        screen.render(Tiles.HERO, hero.x / tileWidth, hero.y / tileHeight);
     }
 
     public void update(InputHandler input) {
-
+        if(input.up)hero.y -= hero.speed;
+        if(input.down)hero.y += hero.speed;
+        if(input.left)hero.x -= hero.speed;
+        if(input.right)hero.x += hero.speed;
     }
 }

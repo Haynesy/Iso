@@ -29,13 +29,15 @@ public class InputHandler implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        if(KeyEvent.VK_ESCAPE == e.getKeyCode())
-            escape = true;
+
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         keys[e.getKeyCode()] = true;
+
+        if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+            escape = true;
     }
 
     @Override

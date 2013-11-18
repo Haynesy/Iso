@@ -10,6 +10,8 @@ package me.haynesy.iso.entities;
 public class Hero extends Entity {
 
     public Hero(){
+        super();
 
+        speed = 1;
     }
 }

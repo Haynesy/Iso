@@ -12,10 +12,13 @@ import me.haynesy.iso.graphics.Bitmap;
 public class Entity {
 
     Bitmap texture;
-    int x, y;
-    double speed; // in pixels
+    public int x;
+    public int y;
+    public double speed; // in pixels
 
     public Entity(){
-
+        x = 0;
+        y = 0;
+        speed = 0.0;
     }
 }

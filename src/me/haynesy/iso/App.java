@@ -15,35 +15,39 @@ import java.util.Random;
  * Time: 1:18 PM
  * To change this template use File | Settings | File Templates.
  */
-public class App extends JFrame implements Runnable{
+public class App extends Canvas implements Runnable{
     private static Thread thread;
     private boolean running;
     private BufferedImage screenImage;
     private Screen screen;
     private Level level;
 
-    private static int WIDTH = 200;
-    private static int HEIGHT = 120;
-    private static int SCALE = 4;
-    private Random random;
+    private static int WIDTH = 240;
+    private static int HEIGHT = 200;
+    private static int SCALE = 2;
     private InputHandler input;
 
     public App(){
-
+        setFocusable(true);
     }
 
     public static void start() {
+
+        JFrame frame = new JFrame("App");
+
         Dimension size = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
 
         App app = new App();
-        app.setTitle("Test");
-        app.setSize(size);
-        app.setMaximumSize(size);
-        app.setMinimumSize(size);
-        app.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setSize(size);
+        frame.setSize(size);
+        frame.setMaximumSize(size);
+        frame.setMinimumSize(size);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        app.setFocusable(true);
-        app.setVisible(true);
+        frame.add(app);
+        frame.pack();
+
+        frame.setVisible(true);
 
         thread = new Thread(app, "App");
         thread.start();
@@ -110,8 +114,6 @@ public class App extends JFrame implements Runnable{
         addKeyListener(input);
 
         level = new Level(screen);
-
-        random = new Random();
     }
 
     private void render() {
@@ -128,6 +130,7 @@ public class App extends JFrame implements Runnable{
     private void tick() {
         input.update();
         level.update(input);
+
         if(input.escape)
             running = false;
 
